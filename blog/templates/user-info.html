@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}用户信息{% endblock %}
+
+{% block head %}
+        <style type="text/css">
+            ul li{
+                list-style: none;
+            }
+            .q-t{
+                margin-left: 50px;
+            }
+        </style>
+{% endblock %}
+
+{% block main %}
+        <h1 style="text-align: center; color: #9b9b9b">个人中心</h1>
+    <hr>
+    <ul>
+        <li>
+            <h3>用户名：{{ user.username }}</h3>
+        </li>
+        <li>
+        <h3 style="float: left">电话号码：{{ user.telephone }}</h3>
+        <h3 style="float: right;"><a href="{{ url_for('change_psw') }}">修改密码</a></h3>
+        </li>
+        <br>
+        <br>
+        <br>
+        <li><h3>我发布的问题：</h3></li>
+        <hr>
+    </ul>
+        <ol>
+        {% for qusetion in user.questions[::-1] %}
+            <form action="{{ url_for('delete') }}" method="post">
+            <li class="q-t"><h4>
+                <a href="{{ url_for('comment_info',id = qusetion.id) }}">
+                {{ qusetion.title }}
+                </a>
+                <input type="hidden" name="delete_question" value="{{ qusetion.id }}">
+                <button class="btn btn-primary"  name="delete_question" style="float:right;">删除</button>
+            </h4></li>
+            <hr>
+            </form>
+        {% endfor %}
+        </ol>
+
+    <ol><h3>我的评论：</h3>
+        <hr>
+        {% for comment in user.comments[::-1] %}
+            <form action="{{ url_for('delete') }}" method="post">
+            <li class="q-t"><h4>
+                {{ comment.content[:10] }}...<h style="color: magenta">来自问题-----</h>
+                <a href="{{ url_for('comment_info',id=comment.question.id) }}">
+                    {{ comment.question.title }}
+                </a>
+                <input type="hidden" name="delete_comment" value="{{ comment.id }}">
+
+                <button class="btn btn-primary"  name="delete" style="float:right;">删除</button>
+            </h4></li>
+            <hr>
+            </form>
+        {% endfor %}
+    </ol>
+
+{% endblock %}

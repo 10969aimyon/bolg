@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}修改密码{% endblock %}
+
+{% block head %}
+    <style type="text/css">
+            .form-content{
+                width: 300px;
+                margin: 0 auto;
+            }
+            h2 {
+                text-align: center;
+                text-decoration-color: chocolate;
+                margin-bottom: 20px;
+            }
+    </style>
+{% endblock %}
+
+
+{% block main %}
+        <form action="" method="post">
+        <h2>修改密码</h2>
+        <div class="form-content">
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="请输入原密码" name="password1">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="请输入新密码" name="password2">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="请再次输入新密码" name="password3">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block">确定修改</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
